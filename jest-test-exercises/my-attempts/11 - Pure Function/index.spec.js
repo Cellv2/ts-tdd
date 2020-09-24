@@ -1,45 +1,57 @@
 // setPrice(item: Object, price: Number) => item: Object
 const setPrice = (item, price) => {
-  // TODO: implement
+    // this should work?
+    // const _item = {
+    //     ...item,
+    //     price,
+    // };
+
+    const _item = Object.assign({}, item, {
+        price,
+    });
+
+    return _item;
 };
 
 // addToCart(cart: Array, item: Object) => cart: Array
 const addToCart = (cart, item) => {
-  // TODO: implement
+    const _cart = [...cart, item];
+
+    return _cart;
 };
 
-describe('setPrice()', () => {
-  it('should set the price in the given item object, immutably.', () => {
-    const item = {
-      name: 'test',
-      price: 30,
-    };
-    const copy = Object.assign({}, item);
+describe("setPrice()", () => {
+    it("should set the price in the given item object, immutably.", () => {
+        const item = {
+            name: "test",
+            price: 30,
+        };
+        const copy = Object.assign({}, item);
 
-    const actual = setPrice(item, 50);
-    const expected = {
-      name: 'test',
-      price: 50,
-    };
+        const actual = setPrice(item, 50);
+        const expected = {
+            name: "test",
+            price: 50,
+        };
 
-    expect(actual).toEqual(expected);
-    expect(item).toEqual(copy);
-  });
+        expect(actual).toEqual(expected);
+        expect(item).toEqual(copy);
+    });
 });
 
-describe('addToCart()', () => {
-  it('should add item to cart, immutably', () => {
-    const originalCart = [];
-    const item = {
-      name: 'Violator',
-      price: 30,
-    };
-    const copy = originalCart.slice();
+describe("addToCart()", () => {
+    it("should add item to cart, immutably", () => {
+        const originalCart = [];
+        const item = {
+            name: "Violator",
+            price: 30,
+        };
+        const copy = originalCart.slice();
 
-    const actual = addToCart(originalCart, item);
-    const expected = [item];
+        const actual = addToCart(originalCart, item);
+        const expected = [item];
 
-    expect(actual).toEqual(expected);
-    expect(originalCart).toEqual(copy);
-  });
+        expect(actual).toEqual(expected);
+        expect(originalCart).toEqual(copy);
+    });
 });
