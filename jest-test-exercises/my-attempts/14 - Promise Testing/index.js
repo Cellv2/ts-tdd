@@ -42,22 +42,20 @@ const callApi = async (url = "", options = {}) => {
         .then((result) => {
             let retObj = {
                 resp: result,
-                json: JSON.parse(result.body),
             };
 
-            // still broken
             if (result.status === 204) {
                 retObj.json = null;
                 return retObj;
             }
 
             if (!result.ok) {
+                retObj.json = JSON.parse(result.body);
                 return retObj;
             }
 
-            if (result.status !== "204" && result.ok) {
-                return retObj;
-            }
+            retObj.json = JSON.parse(result.body);
+            return retObj;
         })
         .catch((err) => {
             throw new Error(err);
