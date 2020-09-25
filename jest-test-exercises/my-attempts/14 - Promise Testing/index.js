@@ -33,50 +33,37 @@ const normalizeCasing = (value) => {
 
 const callApi = async (url = "", options = {}) => {
     // TODO: implement
-    // const request = fetch(LOCATION_ORIGIN + url, {
-    //     ...defaultFetchHeaders,
-    // });
+
     const request = fetch(LOCATION_ORIGIN + url, {
         ...defaultFetchHeaders,
-    })
-        // .then(response => response.text())
-        // .then(data => {
-        //     return {
-        //         resp: 200,
-        //         json: JSON.parse(data)
-        //     }
-        // })
-    ;
-
-    // return request
+    });
 
     const response = request
         .then((result) => {
             let retObj = {
                 resp: result,
-                json: null,
+                json: JSON.parse(result.body),
             };
 
-            if (result.status === "204") {
+            // still broken
+            if (result.status === 204) {
+                retObj.json = null;
                 return retObj;
             }
 
             if (!result.ok) {
-                retObj.json = JSON.parse(result.body);
                 return retObj;
             }
 
-            return retObj;
+            if (result.status !== "204" && result.ok) {
+                return retObj;
+            }
         })
         .catch((err) => {
             throw new Error(err);
         });
 
     return response;
-
-    // const res = request.json();
-
-    return req;
 };
 
 export default callApi;
