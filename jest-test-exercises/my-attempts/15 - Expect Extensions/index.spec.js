@@ -28,7 +28,7 @@ expect.extend({
 });
 
 test('should return function', () => {
-  const value = undefined;
+  const value = () => {};
   expect(value).toBeFunction();
 });
 
@@ -38,10 +38,10 @@ test('should not be function', () => {
 });
 
 test('should return property', () => {
-  const value = undefined;
+  const value = { name: "Test" };
   expect(value).toHaveProperty('name');
 });
 test('should return property', () => {
-  const value = undefined;
+  const value = { notAge: "9001" };
   expect(value).not.toHaveProperty('age');
 });
