@@ -56,6 +56,7 @@ const callApi = (url = "", options = {}) => {
     });
 
     const response = request
+
         .then((result) => {
             let retObj = {
                 resp: result,
