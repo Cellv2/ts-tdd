@@ -9,6 +9,7 @@ module.exports = {
     transform: {
         "^.+\\.(ts|tsx)|(js|jsx)$": "ts-jest",
     },
+    // comment out this to make it (kind of) work
     setupFiles: ["./jest.setup.js"],
     transformIgnorePatterns: [`./node_modules/(?!${esModules})`],
 };
