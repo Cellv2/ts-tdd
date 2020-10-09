@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "tsc",
-        "test": "jest"
+        "test": "jest --watch-all"
     },
     "author": "Cellv2",
     "license": "ISC",
