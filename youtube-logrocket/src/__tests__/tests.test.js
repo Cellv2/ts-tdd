@@ -86,3 +86,19 @@ test("should spy using mockImplementation", () => {
     expect(pizza.name("Cheese")).not.toBe("Crazy pizza"); // this shouldn't be the case any more, as the mock was reset
     expect(pizza.name("Cheese")).toBe("Pizza name: Cheese");
 });
+
+/**
+ * Data matching
+ */
+test("should pizza returns new york last", () => {
+    const pizza1 = pizzas[0];
+    const pizza2 = pizzas[1];
+    const pizza3 = pizzas[2];
+    const pizza = jest.fn((currentPizza) => currentPizza.name);
+
+    pizza(pizza1);
+    pizza(pizza2);
+    pizza(pizza3);
+
+    expect(pizza).toHaveLastReturnedWith("New York Pizza");
+});
