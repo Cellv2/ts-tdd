@@ -57,3 +57,18 @@ test("should mock implementation of a function", () => {
     expect(mock("Location")).toBe("United Kingdom");
     expect(mock).toHaveBeenLastCalledWith("Location");
 });
+
+
+/**
+ * Spying
+ */
+// this can be used for classes, modules etc.
+test("should spy using original implementation", () => {
+    const pizza = {
+        name: (n) => `Pizza name: ${n}`,
+    };
+
+    const spy = jest.spyOn(pizza, "name");
+    expect(pizza.name("Cheese")).toBe("Pizza name: Cheese");
+    expect(spy).toHaveBeenCalledWith("Cheese");
+});
