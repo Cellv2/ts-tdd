@@ -58,11 +58,10 @@ test("should mock implementation of a function", () => {
     expect(mock).toHaveBeenLastCalledWith("Location");
 });
 
-
 /**
  * Spying
+ * This can be used for classes, modules etc.
  */
-// this can be used for classes, modules etc.
 test("should spy using original implementation", () => {
     const pizza = {
         name: (n) => `Pizza name: ${n}`,
@@ -71,4 +70,19 @@ test("should spy using original implementation", () => {
     const spy = jest.spyOn(pizza, "name");
     expect(pizza.name("Cheese")).toBe("Pizza name: Cheese");
     expect(spy).toHaveBeenCalledWith("Cheese");
+});
+
+test("should spy using mockImplementation", () => {
+    const pizza = {
+        name: (n) => `Pizza name: ${n}`,
+    };
+
+    const spy = jest.spyOn(pizza, "name");
+    spy.mockImplementation((n) => `Crazy pizza!`);
+    expect(pizza.name("Cheese")).toBe("Crazy pizza!");
+
+    // we reset the mockImplementation we do above, but keeps the original implementation
+    spy.mockRestore();
+    expect(pizza.name("Cheese")).not.toBe("Crazy pizza"); // this shouldn't be the case any more, as the mock was reset
+    expect(pizza.name("Cheese")).toBe("Pizza name: Cheese");
 });
