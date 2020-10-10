@@ -1,5 +1,8 @@
 import pizzas from "../data.json";
 
+/**
+ * Data testing
+ */
 test("the pizza data is correct", () => {
     expect(pizzas).toMatchSnapshot();
     expect(pizzas).toHaveLength(4);
@@ -21,12 +24,16 @@ for (let i = 0; i < pizzas.length; i++) {
     });
 }
 
+/**
+ * Function mocking
+ */
 test("should mock implementation of a basic function", () => {
     const mock = jest.fn(() => "I am a mock function");
     expect(mock("calling my mock function")).toBe("I am a mock function");
     expect(mock).toHaveBeenCalledWith("calling my mock function");
 });
 
+// this seems to be just for brute forcing the return, not sure why we wouldn't just use mockImplementation()?
 test("should mock return value of a function one time", () => {
     const mock = jest.fn();
     mock.mockReturnValueOnce("hello").mockReturnValueOnce("there");
@@ -41,5 +48,12 @@ test("should mock return value of a function one time", () => {
     expect(mock).toHaveBeenCalledWith("hello", "there", "brian");
 
     mock("brian");
-    expect(mock).toHaveBeenLastCalledWith("brian")
+    expect(mock).toHaveBeenLastCalledWith("brian");
+});
+
+test("should mock implementation of a function", () => {
+    const mock = jest.fn().mockImplementation(() => "United Kingdom");
+
+    expect(mock("Location")).toBe("United Kingdom");
+    expect(mock).toHaveBeenLastCalledWith("Location");
 });
